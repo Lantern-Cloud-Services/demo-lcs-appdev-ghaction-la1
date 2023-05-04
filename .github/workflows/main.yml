@@ -19,7 +19,10 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+      ENV_RESOURCEGROUP: demo-lcs-appdev-ghaction-rg1
+      ENV_RESOURCEGROUPLOCATION: centralus
+ 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -34,3 +37,28 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+            creds: ${{secrets.GHDEMOLOGIN}}
+
+          # Create the resource group
+      - name: Create Resource Group
+        run: az group create -n ${{env.ENV_RESOURCEGROUP}} -l ${{env.ENV_RESOURCEGROUPLOCATION}}
+
+      #Validate the  ARM template
+      - name: Validate ARM template
+        run: |
+          az deployment group validate -g ${{env.ENV_RESOURCEGROUP}} --mode Incremental --template-file ./template.json --parameters ./parameters.json
+    
+
+      #Deploy the ARM Template
+      - name: Deploy Logic App
+        run: |
+          az group deployment create -g ${{env.ENV_RESOURCEGROUP}} --template-file ./template.json --parameters ./parameters.json
+        shell: bash   
+        
+      # Log Out From Azure 
+      - name: Logout
+        run: az logout    
