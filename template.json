@@ -42,7 +42,7 @@
                             "kind": "Http",
                             "inputs": {
                                 "body": {
-                                    "msg": "Hello World!"
+                                    "msg": "Hello New World!"
                                 },
                                 "statusCode": 200
                             }
