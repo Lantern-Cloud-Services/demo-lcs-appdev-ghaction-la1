@@ -1,5 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
+
+
+# generated with github copilot
+# GitHub Copilot: This is a GitHub Actions workflow file written in YAML format. The file starts with a comment that explains the purpose of the workflow. The name of the workflow is "CI - demo". The "on" section specifies the events that will trigger the workflow. In this case, the workflow will run when there is a push event on the "main" branch. There is also a manual trigger option available in the Actions tab.
+# The workflow contains a single job called "build". The job runs on an Ubuntu virtual machine. There are several environment variables defined for the job. The "steps" section contains a sequence of tasks that will be executed as part of the job.
+# The first step checks out the repository under the $GITHUB_WORKSPACE directory so that the job can access it. The second step runs a single command using the runner's shell to print "Hello, world!". The third step runs a multi-line script that prints a message to add other actions to build, test, and deploy the project.
+# The fourth step logs in to Azure using the azure/login action. The fifth step creates a resource group in Azure using the az command-line interface. The sixth step validates an ARM template using the az deployment group validate command. The seventh step deploys the ARM template.
+
+
+
 name: CI - demo
 
 # Controls when the workflow will run
